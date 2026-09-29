@@ -1,0 +1,148 @@
+{
+    "actorSpecification": 1,
+    "fields": {
+        "type": "object",
+        "properties": {
+            "recordType": {
+                "type": "string",
+                "title": "Record Type"
+            },
+            "globalSentimentScore": {
+                "type": "number",
+                "title": "Global Composite Score (0-100)"
+            },
+            "globalClassification": {
+                "type": "string",
+                "title": "Global Regime"
+            },
+            "stockSentimentScore": {
+                "type": "number",
+                "title": "Stock Sentiment Score (0-100)"
+            },
+            "stockClassification": {
+                "type": "string",
+                "title": "Stock Regime"
+            },
+            "cryptoSentimentScore": {
+                "type": "number",
+                "title": "Crypto Sentiment Score (0-100)"
+            },
+            "cryptoClassification": {
+                "type": "string",
+                "title": "Crypto Regime"
+            },
+            "marketMomentumScore": {
+                "type": "number",
+                "title": "Momentum Score"
+            },
+            "vixScore": {
+                "type": "number",
+                "title": "VIX Volatility Score"
+            },
+            "safeHavenScore": {
+                "type": "number",
+                "title": "Safe Haven Score"
+            },
+            "junkBondScore": {
+                "type": "number",
+                "title": "Junk Bond Score"
+            },
+            "putCallRatioScore": {
+                "type": "number",
+                "title": "Put/Call Ratio Score"
+            },
+            "retailCryptoFngScore": {
+                "type": "number",
+                "title": "Retail Crypto FNG"
+            },
+            "stablecoinSupplyBillions": {
+                "type": "number",
+                "title": "Stablecoin Supply ($B)"
+            },
+            "calculatedAt": {
+                "type": "string",
+                "title": "Calculated At"
+            }
+        }
+    },
+    "views": {
+        "overview": {
+            "title": "Sentiment Overview",
+            "description": "Executive dashboard of Global, Equity, and Crypto Fear & Greed indices and key underlying drivers.",
+            "transformation": {
+                "fields": [
+                    "globalSentimentScore",
+                    "globalClassification",
+                    "stockSentimentScore",
+                    "stockClassification",
+                    "cryptoSentimentScore",
+                    "cryptoClassification",
+                    "marketMomentumScore",
+                    "vixScore",
+                    "safeHavenScore",
+                    "junkBondScore",
+                    "putCallRatioScore",
+                    "retailCryptoFngScore",
+                    "stablecoinSupplyBillions"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "columns": {
+                    "globalSentimentScore": {
+                        "label": "Global (0-100)",
+                        "format": "number"
+                    },
+                    "globalClassification": {
+                        "label": "Global Regime",
+                        "format": "text"
+                    },
+                    "stockSentimentScore": {
+                        "label": "Stocks (0-100)",
+                        "format": "number"
+                    },
+                    "stockClassification": {
+                        "label": "Stock Regime",
+                        "format": "text"
+                    },
+                    "cryptoSentimentScore": {
+                        "label": "Crypto (0-100)",
+                        "format": "number"
+                    },
+                    "cryptoClassification": {
+                        "label": "Crypto Regime",
+                        "format": "text"
+                    },
+                    "marketMomentumScore": {
+                        "label": "Momentum",
+                        "format": "number"
+                    },
+                    "vixScore": {
+                        "label": "VIX Score",
+                        "format": "number"
+                    },
+                    "safeHavenScore": {
+                        "label": "Safe Haven",
+                        "format": "number"
+                    },
+                    "junkBondScore": {
+                        "label": "Junk Bond",
+                        "format": "number"
+                    },
+                    "putCallRatioScore": {
+                        "label": "Put/Call",
+                        "format": "number"
+                    },
+                    "retailCryptoFngScore": {
+                        "label": "Crypto FNG",
+                        "format": "number"
+                    },
+                    "stablecoinSupplyBillions": {
+                        "label": "Stablecoins ($B)",
+                        "format": "number"
+                    }
+                }
+            }
+        }
+    }
+}
