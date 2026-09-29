@@ -1,0 +1,12 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Cross-Asset Market Sentiment Output",
+    "properties": {
+        "dataset": {
+            "type": "string",
+            "title": "Dataset link",
+            "description": "Direct link to the dataset containing market sentiment intelligence, gauges, correlations, and timeseries.",
+            "template": "{{links.apiDefaultDatasetUrl}}/items"
+        }
+    }
+}
