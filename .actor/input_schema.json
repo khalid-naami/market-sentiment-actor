@@ -1,0 +1,45 @@
+{
+    "title": "Cross-Asset Market Sentiment Input",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "includeStockSentiment": {
+            "title": "Include Stock Market Sentiment (Fear & Greed)",
+            "type": "boolean",
+            "description": "Calculate equity sentiment index from Momentum, VIX, Safe Haven demand, Junk Bond demand, and Options Put/Call ratio.",
+            "default": true
+        },
+        "includeCryptoSentiment": {
+            "title": "Include Crypto Market Sentiment (Fear & Greed)",
+            "type": "boolean",
+            "description": "Calculate crypto sentiment index from Alternative.me FNG, BTC momentum, ETH/BTC strength, and rolling volatility.",
+            "default": true
+        },
+        "includeCorrelationMatrix": {
+            "title": "Include Macro-Crypto Pearson Correlation Matrix",
+            "type": "boolean",
+            "description": "Compute 90-day correlation matrix between Bitcoin, Ethereum, Solana, S&P 500, Gold, Oil, and US Dollar Index.",
+            "default": true
+        },
+        "includeStablecoinSupply": {
+            "title": "Include Circulating Stablecoin Supply & BTC Price",
+            "type": "boolean",
+            "description": "Fetch DeFiLlama total circulating stablecoin supply and cross-reference with Bitcoin price to track liquidity expansions.",
+            "default": true
+        },
+        "includeBenchmarkPerformance": {
+            "title": "Include Multi-Horizon Performance Comparison",
+            "type": "boolean",
+            "description": "Compute 1W, 1M, 3M, 6M, YTD, 1Y, 5Y percentage returns for major equity and crypto benchmarks.",
+            "default": true
+        },
+        "historyDays": {
+            "title": "Historical Sentiment History (Days)",
+            "type": "integer",
+            "description": "Number of daily historical sentiment records to output in the timeseries.",
+            "default": 30,
+            "minimum": 7,
+            "maximum": 365
+        }
+    }
+}
