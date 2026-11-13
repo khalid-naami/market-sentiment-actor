@@ -55,15 +55,86 @@
                 "type": "number",
                 "title": "Retail Crypto FNG"
             },
+            "bitcoinMomentumScore": {
+                "type": "number",
+                "title": "Bitcoin Momentum Score"
+            },
+            "ethBtcStrengthScore": {
+                "type": "number",
+                "title": "ETH/BTC Relative Strength Score"
+            },
+            "bitcoinVolatilityScore": {
+                "type": "number",
+                "title": "Bitcoin Volatility Score"
+            },
             "stablecoinSupplyBillions": {
                 "type": "number",
                 "title": "Stablecoin Supply ($B)"
+            },
+            "stockIndicatorsBreakdown": {
+                "type": "object",
+                "title": "Stock Indicators Breakdown",
+                "additionalProperties": true
+            },
+            "cryptoIndicatorsBreakdown": {
+                "type": "object",
+                "title": "Crypto Indicators Breakdown",
+                "additionalProperties": true
+            },
+            "stockSentimentHistory": {
+                "type": "array",
+                "title": "Stock Sentiment History",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            },
+            "cryptoSentimentHistory": {
+                "type": "array",
+                "title": "Crypto Sentiment History",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            },
+            "benchmarkPerformance": {
+                "type": "object",
+                "title": "Benchmark Performance Matrix",
+                "additionalProperties": true
+            },
+            "macroCorrelationMatrix": {
+                "type": "object",
+                "title": "Macro Correlation Matrix",
+                "additionalProperties": true
+            },
+            "stablecoinFlows": {
+                "type": "array",
+                "title": "Stablecoin Supply & BTC Flows",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": true
+                }
+            },
+            "date": {
+                "type": "string",
+                "title": "Date"
+            },
+            "value": {
+                "type": "number",
+                "title": "Daily Sentiment Score"
+            },
+            "classification": {
+                "type": "string",
+                "title": "Daily Sentiment Classification"
             },
             "calculatedAt": {
                 "type": "string",
                 "title": "Calculated At"
             }
-        }
+        },
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": true,
+        "required": []
     },
     "views": {
         "overview": {
