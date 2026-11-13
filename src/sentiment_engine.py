@@ -18,7 +18,7 @@ def classify_sentiment(val: float) -> tuple:
     else:
         return "Extreme Greed 🚀", "#00FF87"
 
-def calculate_stock_sentiment(df_prices: pd.DataFrame, put_call_ratio_val: float = 0.85) -> tuple:
+def calculate_stock_sentiment(df_prices: pd.DataFrame, put_call_ratio_val: float = 0.85, limit: int = 60) -> tuple:
     """
     Calculate 5 sub-indicators and overall Stock Market Sentiment index (0-100).
     """
@@ -101,7 +101,7 @@ def calculate_stock_sentiment(df_prices: pd.DataFrame, put_call_ratio_val: float
     
     # Historical list
     hist_list = []
-    for dt, row in df_hist.tail(60).iterrows():
+    for dt, row in df_hist.tail(max(limit, 60)).iterrows():
         hist_list.append({
             "date": dt.strftime('%Y-%m-%d'),
             "value": round(float(row['Stock_Sentiment']), 1),
@@ -232,7 +232,10 @@ def compute_correlation_matrix(df_prices: pd.DataFrame) -> dict:
     
     corr_dict = {}
     for r in corr.index:
-        corr_dict[r] = {c: round(float(corr.loc[r, c]), 3) for c in corr.columns}
+        corr_dict[r] = {
+            c: 0.0 if pd.isna(corr.loc[r, c]) else round(float(corr.loc[r, c]), 3)
+            for c in corr.columns
+        }
         
     return {
         "matrix": corr_dict,
