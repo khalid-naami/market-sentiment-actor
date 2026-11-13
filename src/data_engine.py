@@ -30,7 +30,7 @@ def fetch_crypto_fng(limit: int = 30) -> pd.DataFrame:
         logger.warning(f"Failed to fetch Alternative.me crypto FNG: {e}")
         
     # Default fallback
-    dates = pd.date_range(end=datetime.datetime.now(), periods=limit, freq='D')
+    dates = pd.date_range(end=datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None), periods=limit, freq='D')
     return pd.DataFrame({
         'timestamp': dates,
         'value': [52] * limit,
@@ -55,7 +55,7 @@ def fetch_stablecoins_supply() -> pd.DataFrame:
         logger.warning(f"Failed to fetch DeFiLlama stablecoin supply: {e}")
         
     # Default fallback
-    dates = pd.date_range(end=datetime.datetime.now(), periods=180, freq='D')
+    dates = pd.date_range(end=datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None), periods=180, freq='D')
     return pd.DataFrame({
         'date_parsed': dates,
         'supply': [182500000000.0] * 180  # ~$182.5 Billion
@@ -90,7 +90,7 @@ def fetch_market_assets_history() -> dict:
     for name, ticker in assets.items():
         try:
             t = yf.Ticker(ticker)
-            hist = t.history(period="300d")
+            hist = t.history(period="2y")
             if hist is not None and not hist.empty:
                 hist.index = pd.to_datetime(hist.index.date)
                 price_dict[name] = hist['Close']
