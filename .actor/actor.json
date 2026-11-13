@@ -5,12 +5,13 @@
     "description": "Real-time psychological market indices, stock & crypto Fear & Greed gauges, Put/Call ratios, VIX term indicators, macro correlation matrix, and stablecoin liquidity flows.",
     "version": "1.0",
     "meta": {
-        "template": "python-empty"
+        "templateId": "python-empty"
     },
     "dockerfile": "../Dockerfile",
     "input": "./input_schema.json",
     "storages": {
-        "dataset": "./dataset_schema.json"
+        "dataset": "./dataset_schema.json",
+        "keyValueStore": "./key_value_store_schema.json"
     },
     "output": "./output_schema.json"
 }
