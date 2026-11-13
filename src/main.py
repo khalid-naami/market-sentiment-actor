@@ -49,7 +49,7 @@ async def main():
         df_stablecoins = fetch_stablecoins_supply()
         
         # 5. Compute Sentiment Sub-Indicators
-        stock_indicators, stock_val, stock_hist = calculate_stock_sentiment(df_prices, pc_ratio)
+        stock_indicators, stock_val, stock_hist = calculate_stock_sentiment(df_prices, pc_ratio, limit=history_days)
         crypto_indicators, crypto_val, crypto_hist = calculate_crypto_sentiment(df_prices, df_fng)
         
         stock_class, stock_color = classify_sentiment(stock_val)
@@ -103,21 +103,23 @@ async def main():
         await Actor.push_data(master_record)
         
         # Push daily historical sentiment rows for easy table charting
-        for row in stock_hist[-history_days:]:
-            await Actor.push_data({
-                "recordType": "STOCK_DAILY_SENTIMENT",
-                "date": row["date"],
-                "value": row["value"],
-                "classification": row["classification"]
-            })
+        if include_stocks:
+            for row in stock_hist[-history_days:]:
+                await Actor.push_data({
+                    "recordType": "STOCK_DAILY_SENTIMENT",
+                    "date": row["date"],
+                    "value": row["value"],
+                    "classification": row["classification"]
+                })
             
-        for row in crypto_hist[-history_days:]:
-            await Actor.push_data({
-                "recordType": "CRYPTO_DAILY_SENTIMENT",
-                "date": row["date"],
-                "value": row["value"],
-                "classification": row["classification"]
-            })
+        if include_crypto:
+            for row in crypto_hist[-history_days:]:
+                await Actor.push_data({
+                    "recordType": "CRYPTO_DAILY_SENTIMENT",
+                    "date": row["date"],
+                    "value": row["value"],
+                    "classification": row["classification"]
+                })
             
         # Store executive summary in default Key-Value store
         summary_payload = {
@@ -139,6 +141,9 @@ async def main():
             "benchmarkHighlights": benchmarks
         }
         await Actor.set_value("OUTPUT", summary_payload)
+        if not master_record:
+            await Actor.fail(status_message="Market Sentiment Actor produced 0 records.")
+            return
         
         Actor.log.info(f"✅ Market Sentiment Actor completed! Master dossier and {len(stock_hist[-history_days:]) + len(crypto_hist[-history_days:])} daily records pushed to Apify Dataset.")
 
